@@ -2,8 +2,8 @@
 PRACTICE Test 1, problem 2.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and William Makinen.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -101,8 +101,23 @@ def problem2a(circle, rectangle, window):
       :type rectangle: rg.Rectangle
       :type window:    rg.RoseWindow
     """
+
+    circle.attach_to(window)
+    rectangle.attach_to(window)
+    window.render(0.5)
+    window.get_next_mouse_click()
+    st = rectangle.get_upper_right_corner()
+    en = rectangle.get_lower_left_corner()
+    line = rg.Line(st, en)
+    line.arrow = 'last'
+    line.attach_to(window)
+    window.render(0.5)
+    window.get_next_mouse_click()
+    circle.fill_color = rectangle.outline_color
+    window.render(0.5)
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -143,7 +158,7 @@ def run_test_problem2b():
     window.close_on_mouse_click()
 
 
-def problem2b(rect, n, delta, win):
+def problem2b(rect, n, f, win):
     """
     See   problem2b_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
@@ -172,8 +187,25 @@ def problem2b(rect, n, delta, win):
       :type delta:  int
       :type win:    rg.RoseWindow
     """
+
+    rect.attach_to(win)
+    x1 = rect.get_upper_right_corner().x
+    x2 = rect.get_lower_left_corner().x
+    y1 = rect.get_upper_right_corner().y
+    y2 = rect.get_lower_left_corner().y
+    for k in range(n):
+        c1 = rg.Point(x1, y1)
+        c2 = rg.Point(x2, y2)
+        rec = rg.Rectangle(c1, c2)
+        rec.attach_to(win)
+        x1 = x1 + f
+        x2 = x2 - f
+        y1 = y1 - f
+        y2 = y2 + f
+    win.render()
+
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
